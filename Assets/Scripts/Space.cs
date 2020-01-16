@@ -5,16 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Space
 {
-    private int myPosX;
-    private int myPosY;
     private int myType; // 0 = unaligned normal, 1 = red base, 2 = red normal, 3 = blue base, 4 = blue normal
     private int[] myUnits; // counts number of units. 0 = blank (for consistency with myType), 1 = red active, 2 = red dormant, 3 = blue active, 4 = blue dormant
     private int[] myAdjacentSpaces; // Spaces you can move to from here
 
-    public Space(int posX, int posY, int type, int[] adjacentSpaces)
+    public Space(int type, int[] adjacentSpaces)
     {
-        myPosX = posX;
-        myPosY = posY;
         myType = type;
         myUnits = new int[5];
         for(int i = 0; i < 5; i++)
