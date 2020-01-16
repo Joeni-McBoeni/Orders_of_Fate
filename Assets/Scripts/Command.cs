@@ -30,4 +30,29 @@ public class Command
         get { return myParameters; }
         set { myParameters = value; }
     }
+
+    public void doCommand(int playerId) // 1 = red, 3 = blu
+    {
+        // debug space placeholder. where the spaces are actually saved I'll worry about later
+        List<Space> gameSpaces = new List<Space>();
+
+        switch (this.myId)
+        {
+            case 1:
+                int availableUnits = gameSpaces[myParameters[0]].units[playerId];
+                if (availableUnits >= myParameters[2])
+                {
+                    gameSpaces[myParameters[0]].units[playerId] -= myParameters[2];
+                    gameSpaces[myParameters[1]].units[playerId + 1] += myParameters[2];
+                } 
+                else
+                {
+                    gameSpaces[myParameters[0]].units[playerId] -= availableUnits;
+                    gameSpaces[myParameters[1]].units[playerId + 1] += availableUnits;
+                }
+                return;
+            default:
+                return;
+        }
+    }
 }

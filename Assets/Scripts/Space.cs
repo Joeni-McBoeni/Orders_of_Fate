@@ -9,8 +9,9 @@ public class Space
     private int myPosY;
     private int myType; // 0 = unaligned normal, 1 = red base, 2 = red normal, 3 = blue base, 4 = blue normal
     private int[] myUnits; // counts number of units. 0 = blank (for consistency with myType), 1 = red active, 2 = red dormant, 3 = blue active, 4 = blue dormant
+    private int[] myAdjacentSpaces; // Spaces you can move to from here
 
-    public Space(int posX, int posY, int type)
+    public Space(int posX, int posY, int type, int[] adjacentSpaces)
     {
         myPosX = posX;
         myPosY = posY;
@@ -20,6 +21,7 @@ public class Space
         {
             myUnits[i] = 0;
         }
+        myAdjacentSpaces = adjacentSpaces;
     }
 
     public void refresh()
@@ -97,5 +99,11 @@ public class Space
     {
         get { return myUnits; }
         set { myUnits = value; }
+    }
+
+    public int[] adjacentSpaces
+    {
+        get { return myAdjacentSpaces; }
+        set { myAdjacentSpaces = value; }
     }
 }
