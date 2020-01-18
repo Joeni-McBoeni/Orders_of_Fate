@@ -9,15 +9,12 @@ public class btn_nextTurn : MonoBehaviour
     public List<Command> commands_b = new List<Command>();
     public List<Space> gameSpaces = new List<Space>();
     public int firstMoveParameter = -1;
+    public int roundIndex = 1;
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         // this will need to be individualized at some point, for different maps
         gameSpaces.Add(new Space(0, new int[3] { 1, 2, 9 }));
         gameSpaces.Add(new Space(0, new int[3] { 0, 3, 4 }));
@@ -30,6 +27,15 @@ public class btn_nextTurn : MonoBehaviour
         gameSpaces.Add(new Space(0, new int[3] { 6, 7, 10 }));
         gameSpaces.Add(new Space(1, new int[1] { 0 }));
         gameSpaces.Add(new Space(3, new int[1] { 8 }));
+
+        gameSpaces[9].units[1] += 1;
+        gameSpaces[10].units[3] += 1;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -56,11 +62,23 @@ public class btn_nextTurn : MonoBehaviour
         }
 
         // Debug Block
-        if(commands_r.Count != 0)
+        if (SceneManager.GetActiveScene().name == "ingame_plan_r")
         {
-            Command cbt = commands_r[commands_r.Count - 1];
-            Debug.Log(cbt.parameters[0].ToString() + " to " + cbt.parameters[1].ToString() + ". No. of Units: " + cbt.parameters[2].ToString());
+            if (commands_r.Count != 0)
+            {
+                Command cbt = commands_r[commands_r.Count - 1];
+                Debug.Log("Round " + roundIndex + ", Red: " + cbt.parameters[0].ToString() + " to " + cbt.parameters[1].ToString() + ". No. of Units: " + cbt.parameters[2].ToString());
+            }
         }
+        else if (SceneManager.GetActiveScene().name == "ingame_plan_b")
+        {
+            if (commands_b.Count != 0)
+            {
+                Command cbt = commands_b[commands_b.Count - 1];
+                Debug.Log("Round " + roundIndex + ", Blue: " + cbt.parameters[0].ToString() + " to " + cbt.parameters[1].ToString() + ". No. of Units: " + cbt.parameters[2].ToString());
+            }
+        }
+
 
         firstMoveParameter = -1;
     }
@@ -87,7 +105,7 @@ public class btn_nextTurn : MonoBehaviour
         }
         else 
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
             SceneManager.LoadScene("ingame_resolve", LoadSceneMode.Single);
         }
     }

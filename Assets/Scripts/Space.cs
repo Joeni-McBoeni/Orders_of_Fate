@@ -41,10 +41,22 @@ public class Space
 
     public void battle()
     {
+        int responsibleUnits_r = 3;
+        int responsibleUnits_b = 4;
         while (myUnits[1] + myUnits[2] != 0 && myUnits[3] + myUnits[4] != 0)
         {
-            int change = 0;
-            myUnits[2] -= change;
+            if(myUnits[responsibleUnits_b] == 0)
+            {
+                responsibleUnits_b--;
+            }
+            if (myUnits[responsibleUnits_r] == 0)
+            {
+                responsibleUnits_r--;
+            }
+
+            int change = System.Math.Abs(myUnits[responsibleUnits_b] - myUnits[responsibleUnits_r]);
+            myUnits[responsibleUnits_b] -= change;
+            myUnits[responsibleUnits_r] -= change;
         }
 
         if(myUnits[1] + myUnits[2] != 0)
@@ -74,14 +86,6 @@ public class Space
                     myType = 4;
                     break;
             }
-        }
-    }
-
-    public void checkBattle()
-    {
-        if (myUnits[1] + myUnits[2] != 0 && myUnits[3] + myUnits[4] != 0)
-        {
-            this.battle();
         }
     }
 
