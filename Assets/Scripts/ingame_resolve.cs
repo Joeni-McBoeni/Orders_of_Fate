@@ -32,7 +32,7 @@ public class ingame_resolve : MonoBehaviour
 
     IEnumerator waiter()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(10);
     }
 
         // Update is called once per frame
@@ -43,14 +43,22 @@ public class ingame_resolve : MonoBehaviour
 
     public void drawBoard()
     {
-        int spaceNumberForDebug = 0;
+        int spaceNumber = 0;
 
         foreach (Space currentSpace in GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().gameSpaces)
         {
+            int previousspace = currentSpace.type;
+
             currentSpace.battle();
 
-            debugshit(currentSpace, spaceNumberForDebug);
-            spaceNumberForDebug++;
+            if(previousspace != currentSpace.type)
+            {
+                GameObject.Find("tile_0" + spaceNumber.ToString()).GetComponent<btn_space>().spriteChange(currentSpace.type);
+            }
+
+            debugshit(currentSpace, spaceNumber);
+
+            spaceNumber++;
         }
 
         debugCycleIndex++;

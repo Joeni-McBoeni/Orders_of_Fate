@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class btn_space : MonoBehaviour
 {
+    private SpriteRenderer spriterenderer;
+
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -12,7 +14,7 @@ public class btn_space : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
-
+        spriterenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,30 @@ public class btn_space : MonoBehaviour
         else
         {
             GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().addMoveCommand(spaceNumber);
+        }
+    }
+
+    public void spriteChange(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                // neutral
+                spriterenderer.sprite = Resources.Load<Sprite>("tile_neutral"); // path is probably wrong
+                Debug.Log("peak centrism");
+                break;
+            case 2:
+                // red
+                spriterenderer.sprite = Resources.Load<Sprite>("tile_red"); // path is probably wrong
+                Debug.Log("turn red you fuck");
+                break;
+            case 4:
+                // blue
+                spriterenderer.sprite = Resources.Load<Sprite>("tile_blue"); // path is probably wrong
+                Debug.Log("you should be blue, dabe dee dabe day");
+                break;
+            default:
+                break;
         }
     }
 }
