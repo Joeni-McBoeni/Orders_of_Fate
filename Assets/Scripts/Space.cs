@@ -39,8 +39,10 @@ public class Space
         }
     }
 
-    public void battle()
+    public int battle()
     {
+        int gameWinner = 0;
+
         int responsibleUnits_r = 2;
         int responsibleUnits_b = 4;
         while (myUnits[1] + myUnits[2] != 0 && myUnits[3] + myUnits[4] != 0)
@@ -76,7 +78,8 @@ public class Space
             switch (myType)
             {
                 case 3: // took over enemy base -> win condition
-                    SceneManager.LoadScene("redwon", LoadSceneMode.Single);
+                    Debug.Log("thank you orcs");
+                    gameWinner = 1;
                     break;
                 case 1:
                     break;
@@ -90,7 +93,8 @@ public class Space
             switch (myType)
             {
                 case 1: // took over enemy base -> win condition
-                    SceneManager.LoadScene("bluwon", LoadSceneMode.Single);
+                    Debug.Log("thank you knights");
+                    gameWinner = 3;
                     break;
                 case 3:
                     break;
@@ -99,6 +103,8 @@ public class Space
                     break;
             }
         }
+
+        return gameWinner;
     }
 
     public int type

@@ -49,7 +49,18 @@ public class ingame_resolve : MonoBehaviour
         {
             int previousspace = currentSpace.type;
 
-            currentSpace.battle();
+            // WRRRRRRRRRRRRRRRRRRYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYy
+            switch (currentSpace.battle())
+            {
+                case 1:
+                    SceneManager.LoadScene("redwon", LoadSceneMode.Single);
+                    break;
+                case 3:
+                    SceneManager.LoadScene("bluwon", LoadSceneMode.Single);
+                    break;
+                default:
+                    break;
+            }
 
             if(previousspace != currentSpace.type)
             {
@@ -60,6 +71,7 @@ public class ingame_resolve : MonoBehaviour
             if(currentSpace.units[1] + currentSpace.units[3] != 0)
             {
                 renderInfoActive = (currentSpace.type + 1) / 2;
+                GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<BoxCollider2D>().enabled = true;
                 GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<Renderer>().enabled = true;
                 GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_e").GetComponent<Renderer>().enabled = true;
                 GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_z").GetComponent<Renderer>().enabled = true;
@@ -78,6 +90,7 @@ public class ingame_resolve : MonoBehaviour
                     GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_z").GetComponent<number_changer>().changeNumber(currentSpace.units[3] / 10);
                     break;
                 default:
+                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<BoxCollider2D>().enabled = false;
                     GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<Renderer>().enabled = false;
                     GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_e").GetComponent<Renderer>().enabled = false;
                     GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_z").GetComponent<Renderer>().enabled = false;
