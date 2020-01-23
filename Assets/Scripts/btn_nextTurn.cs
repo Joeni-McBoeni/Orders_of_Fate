@@ -9,7 +9,7 @@ public class btn_nextTurn : MonoBehaviour
     public List<Command> commands_b = new List<Command>();
     public List<Space> gameSpaces = new List<Space>();
     public int firstMoveParameter = -1;
-    public int roundIndex = 1;
+    public int roundIndex = 0;
 
     void Awake()
     {
@@ -27,9 +27,6 @@ public class btn_nextTurn : MonoBehaviour
         gameSpaces.Add(new Space(0, new int[3] { 6, 7, 10 }));
         gameSpaces.Add(new Space(1, new int[1] { 0 }));
         gameSpaces.Add(new Space(3, new int[1] { 8 }));
-
-        gameSpaces[9].units[1] += 1;
-        gameSpaces[10].units[3] += 1;
     }
 
     // Start is called before the first frame update

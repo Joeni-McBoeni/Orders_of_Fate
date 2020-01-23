@@ -5,22 +5,31 @@ using UnityEngine;
 public class btn_space : MonoBehaviour
 {
     private SpriteRenderer spriterenderer;
+    public Sprite neutralSprite;
+    public Sprite blueSprite;
+    public Sprite redSprite;
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        spriterenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
-        // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
-        spriterenderer = gameObject.GetComponent<SpriteRenderer>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void getClickEvent()
+    {
+        OnMouseDown();
     }
 
     void OnMouseDown()
@@ -42,18 +51,15 @@ public class btn_space : MonoBehaviour
         {
             case 0:
                 // neutral
-                spriterenderer.sprite = Resources.Load<Sprite>("tile_neutral"); // path is probably wrong
-                Debug.Log("peak centrism");
+                spriterenderer.sprite = neutralSprite;
                 break;
             case 2:
                 // red
-                spriterenderer.sprite = Resources.Load<Sprite>("tile_red"); // path is probably wrong
-                Debug.Log("turn red you fuck");
+                spriterenderer.sprite = redSprite;
                 break;
             case 4:
                 // blue
-                spriterenderer.sprite = Resources.Load<Sprite>("tile_blue"); // path is probably wrong
-                Debug.Log("you should be blue, dabe dee dabe day");
+                spriterenderer.sprite = blueSprite;
                 break;
             default:
                 break;
