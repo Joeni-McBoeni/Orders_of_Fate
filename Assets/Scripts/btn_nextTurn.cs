@@ -27,8 +27,6 @@ public class btn_nextTurn : MonoBehaviour
         gameSpaces.Add(new Space(0, new int[3] { 6, 7, 10 }));
         gameSpaces.Add(new Space(1, new int[1] { 0 }));
         gameSpaces.Add(new Space(3, new int[1] { 8 }));
-
-        gameSpaces[8].units[1] += 9;
     }
 
     // Start is called before the first frame update
