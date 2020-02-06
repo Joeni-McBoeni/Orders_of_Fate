@@ -31,7 +31,7 @@ public class Command
         set { myParameters = value; }
     }
 
-    public void doCommand(int playerId) // 1 = red, 3 = blu
+    public void doCommand(int playerId) // 1 = red, 3 = blue
     {
         switch (this.myId)
         {

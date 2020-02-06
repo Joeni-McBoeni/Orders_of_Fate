@@ -18,21 +18,28 @@ public class ingame_resolve : MonoBehaviour
         syncCommands();
         drawBoard();
 
-        for(int counter = 0; counter < commands_r.Count; counter++)
-        {
-            commands_r[counter].doCommand(1);
-            commands_b[counter].doCommand(3);
-
-            StartCoroutine(waiter());
-            drawBoard();
-        }
-
-        endTurn();
+        StartCoroutine(waiter());
     }
 
     IEnumerator waiter()
     {
-        yield return new WaitForSeconds(10);
+        Debug.Log("go in here, dipshit");
+
+        for (int counter = 0; counter < commands_r.Count; counter++)
+        {
+            yield return new WaitForSeconds(1.0f);
+
+            Debug.Log("WRYYYYYYYYYYYYYYYYYYYYY");
+
+            commands_r[counter].doCommand(1);
+            commands_b[counter].doCommand(3);
+
+            drawBoard();
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        endTurn();
     }
 
         // Update is called once per frame
@@ -49,26 +56,15 @@ public class ingame_resolve : MonoBehaviour
         {
             int previousspace = currentSpace.type;
 
-            // WRRRRRRRRRRRRRRRRRRYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYy
-            switch (currentSpace.battle())
-            {
-                case 1:
-                    SceneManager.LoadScene("redwon", LoadSceneMode.Single);
-                    break;
-                case 3:
-                    SceneManager.LoadScene("bluwon", LoadSceneMode.Single);
-                    break;
-                default:
-                    break;
-            }
+            currentSpace.battle();
 
             if(previousspace != currentSpace.type)
             {
-                GameObject.Find("tile_0" + spaceNumber.ToString()).GetComponent<btn_space>().spriteChange(currentSpace.type);
+                GameObject.Find("tile_" + spaceNumber.ToString().PadLeft(2, '0')).GetComponent<btn_space>().spriteChange(currentSpace.type);
             }
 
             int renderInfoActive = 0;
-            if(currentSpace.units[1] + currentSpace.units[3] != 0)
+            if(currentSpace.units[1] + currentSpace.units[2] + currentSpace.units[3] + currentSpace.units[4] != 0)
             {
                 renderInfoActive = (currentSpace.type + 1) / 2;
                 GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<BoxCollider2D>().enabled = true;
@@ -160,10 +156,46 @@ public class ingame_resolve : MonoBehaviour
 
         drawBoard();
 
-        GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().commands_r = new List<Command>();
-        GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().commands_b = new List<Command>();
+        if(GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().gameSpaces[10].type == 1)
+        {
+            destroyEverythingInDontDestroyOnLoad();
 
-        GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().roundIndex++;
-        SceneManager.LoadScene("ingame_plan_r", LoadSceneMode.Single);
+            if(GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().gameSpaces[9].type == 3)
+            {
+                Debug.Log("draw lmao");
+                SceneManager.LoadScene("draw_lmao", LoadSceneMode.Single);
+            }
+            else 
+            {
+                Debug.Log("redwon lmao");
+                SceneManager.LoadScene("redwon", LoadSceneMode.Single);
+            }
+        }
+        else if(GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().gameSpaces[9].type == 3)
+        {
+            destroyEverythingInDontDestroyOnLoad();
+
+            Debug.Log("bluwon lmao");
+            SceneManager.LoadScene("bluwon", LoadSceneMode.Single);
+        }
+        else
+        {
+            GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().commands_r = new List<Command>();
+            GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().commands_b = new List<Command>();
+
+            GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().roundIndex++;
+            SceneManager.LoadScene("ingame_plan_r", LoadSceneMode.Single);
+        }
+    }
+
+    private void destroyEverythingInDontDestroyOnLoad()
+    {
+        var go = new GameObject("Sacrificial Lamb");
+        DontDestroyOnLoad(go);
+
+        foreach (var root in go.scene.GetRootGameObjects())
+        {
+            Destroy(root);
+        }
     }
 }

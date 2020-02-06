@@ -39,10 +39,8 @@ public class Space
         }
     }
 
-    public int battle()
+    public void battle()
     {
-        int gameWinner = 0;
-
         int responsibleUnits_r = 2;
         int responsibleUnits_b = 4;
         while (myUnits[1] + myUnits[2] != 0 && myUnits[3] + myUnits[4] != 0)
@@ -79,7 +77,7 @@ public class Space
             {
                 case 3: // took over enemy base -> win condition
                     Debug.Log("thank you orcs");
-                    gameWinner = 1;
+                    myType = 1;
                     break;
                 case 1:
                     break;
@@ -94,7 +92,7 @@ public class Space
             {
                 case 1: // took over enemy base -> win condition
                     Debug.Log("thank you knights");
-                    gameWinner = 3;
+                    myType = 3;
                     break;
                 case 3:
                     break;
@@ -103,8 +101,6 @@ public class Space
                     break;
             }
         }
-
-        return gameWinner;
     }
 
     public int type
