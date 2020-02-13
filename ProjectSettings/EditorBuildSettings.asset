@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/redwon.unity
     guid: c9b31f6e1739aed43acea0d840584d1e
   - enabled: 1
-    path: Assets/Scenes/ingame_prep.unity
+    path: Assets/Scenes/ingame_prep_1.unity
     guid: b3a322985d2ef164282ab304cfa3f31f
   - enabled: 1
     path: Assets/Scenes/draw_lmao.unity

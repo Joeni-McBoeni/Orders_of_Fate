@@ -8,6 +8,8 @@ public class Space
     private int myType; // 0 = unaligned normal, 1 = red base, 2 = red normal, 3 = blue base, 4 = blue normal
     private int[] myUnits; // counts number of units. 0 = blank (for consistency with myType), 1 = red active, 2 = red dormant, 3 = blue active, 4 = blue dormant
     private int[] myAdjacentSpaces; // Spaces you can move to from here
+    private bool myIndependenceCheck;
+    private bool myGFB;
 
     public Space(int type, int[] adjacentSpaces)
     {
@@ -18,6 +20,8 @@ public class Space
             myUnits[i] = 0;
         }
         myAdjacentSpaces = adjacentSpaces;
+        myIndependenceCheck = false;
+        myGFB = false;
     }
 
     public void refresh()
@@ -41,9 +45,17 @@ public class Space
 
     public void battle()
     {
+        if(myGFB == true)
+        {
+            for(int unitIndex = 1; unitIndex < 5; unitIndex++)
+            {
+                myUnits[unitIndex] = 0;
+            }
+        }
+
         int responsibleUnits_r = 2;
         int responsibleUnits_b = 4;
-        while (myUnits[1] + myUnits[2] != 0 && myUnits[3] + myUnits[4] != 0)
+        while (myUnits[1] + myUnits[2] + myUnits[3] + myUnits[4] != 0) // maybe needs to be "while (myUnits[1] + myUnits[2] != 0 && myUnits[3] + myUnits[4] != 0)"
         {
             if(myUnits[responsibleUnits_b] == 0)
             {
@@ -101,6 +113,20 @@ public class Space
                     break;
             }
         }
+
+        if(myIndependenceCheck == true)
+        {
+            int unitCounter = 0;
+            foreach (int unitNumber in myUnits)
+            {
+                unitCounter += unitNumber;
+            }
+            if (unitCounter == 0 && myType % 2 != 1)
+            {
+                myType = 0;
+            }
+            myIndependenceCheck = false;
+        }
     }
 
     public int type
@@ -119,5 +145,15 @@ public class Space
     {
         get { return myAdjacentSpaces; }
         set { myAdjacentSpaces = value; }
+    }
+
+    public bool independenceCheck
+    {
+        set { myIndependenceCheck = value; }
+    }
+
+    public bool GFB
+    {
+        set { myGFB = value; }
     }
 }

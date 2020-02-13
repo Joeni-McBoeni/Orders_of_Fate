@@ -10,23 +10,88 @@ public class btn_nextTurn : MonoBehaviour
     public List<Space> gameSpaces = new List<Space>();
     public int firstMoveParameter = -1;
     public int roundIndex = 0;
+    public int mapNumber = 0;
+    public bool[] plagueInEffect = new bool[2]; // 0 = red, 1 = blu
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        mapNumber = int.Parse(SceneManager.GetActiveScene().name.Substring(12, 1));
+        addSpaces();
+    }
 
-        // this will need to be individualized at some point, for different maps
-        gameSpaces.Add(new Space(0, new int[3] { 1, 2, 9 }));
-        gameSpaces.Add(new Space(0, new int[3] { 0, 3, 4 }));
-        gameSpaces.Add(new Space(0, new int[3] { 0, 4, 5 }));
-        gameSpaces.Add(new Space(0, new int[2] { 1, 6 }));
-        gameSpaces.Add(new Space(0, new int[4] { 1, 2, 6, 7 }));
-        gameSpaces.Add(new Space(0, new int[2] { 2, 7 }));
-        gameSpaces.Add(new Space(0, new int[3] { 3, 4, 8 }));
-        gameSpaces.Add(new Space(0, new int[3] { 4, 5, 8 }));
-        gameSpaces.Add(new Space(0, new int[3] { 6, 7, 10 }));
-        gameSpaces.Add(new Space(1, new int[1] { 0 }));
-        gameSpaces.Add(new Space(3, new int[1] { 8 }));
+    private void addSpaces()
+    {
+        switch (mapNumber)
+        {
+            case 0:
+                gameSpaces.Add(new Space(0, new int[2] { 2, 9 }));
+                gameSpaces.Add(new Space(0, new int[2] { 3, 9 }));
+                gameSpaces.Add(new Space(0, new int[2] { 0, 4 }));
+                gameSpaces.Add(new Space(0, new int[2] { 1, 4 }));
+                gameSpaces.Add(new Space(0, new int[4] { 2, 3, 5, 6 }));
+                gameSpaces.Add(new Space(0, new int[2] { 4, 7 }));
+                gameSpaces.Add(new Space(0, new int[2] { 4, 8 }));
+                gameSpaces.Add(new Space(0, new int[2] { 5, 10 }));
+                gameSpaces.Add(new Space(0, new int[2] { 6, 10 }));
+                gameSpaces.Add(new Space(1, new int[2] { 0, 1 }));
+                gameSpaces.Add(new Space(3, new int[2] { 7, 8 }));
+                break;
+            case 1:
+                gameSpaces.Add(new Space(0, new int[3] { 1, 2, 9 }));
+                gameSpaces.Add(new Space(0, new int[3] { 0, 3, 4 }));
+                gameSpaces.Add(new Space(0, new int[3] { 0, 4, 5 }));
+                gameSpaces.Add(new Space(0, new int[2] { 1, 6 }));
+                gameSpaces.Add(new Space(0, new int[4] { 1, 2, 6, 7 }));
+                gameSpaces.Add(new Space(0, new int[2] { 2, 7 }));
+                gameSpaces.Add(new Space(0, new int[3] { 3, 4, 8 }));
+                gameSpaces.Add(new Space(0, new int[3] { 4, 5, 8 }));
+                gameSpaces.Add(new Space(0, new int[3] { 6, 7, 10 }));
+                gameSpaces.Add(new Space(1, new int[1] { 0 }));
+                gameSpaces.Add(new Space(3, new int[1] { 8 }));
+                break;
+            case 2:
+                gameSpaces.Add(new Space(0, new int[2] { 3, 9 }));
+                gameSpaces.Add(new Space(0, new int[3] { 2, 4, 9 }));
+                gameSpaces.Add(new Space(0, new int[2] { 1, 5 }));
+                gameSpaces.Add(new Space(0, new int[2] { 0, 6 }));
+                gameSpaces.Add(new Space(0, new int[2] { 1, 7 }));
+                gameSpaces.Add(new Space(0, new int[2] { 2, 8 }));
+                gameSpaces.Add(new Space(0, new int[2] { 3, 7 }));
+                gameSpaces.Add(new Space(0, new int[3] { 4, 6, 10 }));
+                gameSpaces.Add(new Space(0, new int[2] { 5, 10 }));
+                gameSpaces.Add(new Space(1, new int[2] { 0, 1 }));
+                gameSpaces.Add(new Space(3, new int[2] { 7, 8 }));
+                break;
+            case 3:
+                gameSpaces.Add(new Space(0, new int[2] { 1, 9 }));
+                gameSpaces.Add(new Space(0, new int[2] { 0, 3 }));
+                gameSpaces.Add(new Space(0, new int[3] { 4, 5, 9 }));
+                gameSpaces.Add(new Space(0, new int[3] { 1, 4, 6 }));
+                gameSpaces.Add(new Space(0, new int[3] { 2, 3, 7 }));
+                gameSpaces.Add(new Space(0, new int[2] { 2, 7 }));
+                gameSpaces.Add(new Space(0, new int[2] { 3, 8 }));
+                gameSpaces.Add(new Space(0, new int[3] { 4, 5, 10 }));
+                gameSpaces.Add(new Space(0, new int[2] { 6, 10 }));
+                gameSpaces.Add(new Space(1, new int[2] { 0, 2 }));
+                gameSpaces.Add(new Space(3, new int[2] { 7, 8 }));
+                break;
+            case 4:
+                gameSpaces.Add(new Space(0, new int[1] { 2 }));
+                gameSpaces.Add(new Space(0, new int[2] { 2, 3 }));
+                gameSpaces.Add(new Space(0, new int[4] { 0, 1, 4, 9 }));
+                gameSpaces.Add(new Space(0, new int[2] { 1, 4 }));
+                gameSpaces.Add(new Space(0, new int[4] { 2, 3, 5, 6 }));
+                gameSpaces.Add(new Space(0, new int[2] { 4, 7 }));
+                gameSpaces.Add(new Space(0, new int[4] { 4, 7, 8, 10 }));
+                gameSpaces.Add(new Space(0, new int[2] { 5, 6 }));
+                gameSpaces.Add(new Space(0, new int[1] { 6 }));
+                gameSpaces.Add(new Space(1, new int[1] { 2 }));
+                gameSpaces.Add(new Space(3, new int[1] { 6 }));
+                break;
+            default:
+                break;
+        }
     }
 
     // Start is called before the first frame update
@@ -47,11 +112,11 @@ public class btn_nextTurn : MonoBehaviour
         {
             if(possibleSpace == secondMoveParameter)
             {
-                if (SceneManager.GetActiveScene().name == "ingame_plan_r")
+                if (SceneManager.GetActiveScene().name == "ingame_plan_r" && gameSpaces[firstMoveParameter].units[1] != 0)
                 {
                     commands_r.Add(new Command(1, new int[3] { firstMoveParameter, secondMoveParameter, gameSpaces[firstMoveParameter].units[1] }));
                 }
-                else if (SceneManager.GetActiveScene().name == "ingame_plan_b")
+                else if (SceneManager.GetActiveScene().name == "ingame_plan_b" && gameSpaces[firstMoveParameter].units[3] != 0)
                 {
                     commands_b.Add(new Command(1, new int[3] { firstMoveParameter, secondMoveParameter, gameSpaces[firstMoveParameter].units[3] }));
                 }
@@ -76,7 +141,8 @@ public class btn_nextTurn : MonoBehaviour
             }
         }
 
-
+        GameObject.Find("tile_" + firstMoveParameter.ToString().PadLeft(2, '0')).transform.GetComponent<Renderer>().materials[0].color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        GameObject.Find(firstMoveParameter.ToString().PadLeft(2, '0') + "_fig").transform.GetComponent<Renderer>().materials[0].color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         firstMoveParameter = -1;
     }
 

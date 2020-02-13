@@ -298,3 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d2fda56be9aa44c935b87a03274d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spritesForMaps:
+  - {fileID: 21300000, guid: b0836f18206519745b61bfb37b71a00e, type: 3}
+  - {fileID: 21300000, guid: 5091768ef754d024cac346c52c4be20b, type: 3}
+  - {fileID: 21300000, guid: 3b91933a9d599e845aa8e7f70e43d7e7, type: 3}
+  - {fileID: 21300000, guid: d6c46a234247b79449f000ea6ad9cdf5, type: 3}
+  - {fileID: 21300000, guid: 95bbd987d28469e4dbaedce9044978d7, type: 3}

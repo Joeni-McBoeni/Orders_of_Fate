@@ -38,6 +38,8 @@ public class btn_space : MonoBehaviour
         if (GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().firstMoveParameter == -1)
         {
             GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().firstMoveParameter = spaceNumber;
+            GameObject.Find("tile_" + gameObject.name.Substring(5, 2)).transform.GetComponent<Renderer>().materials[0].color = new Color(1.2f, 1.2f, 1.2f, 1.0f);
+            GameObject.Find(gameObject.name.Substring(5, 2) + "_fig").transform.GetComponent<Renderer>().materials[0].color = new Color(1.2f, 1.2f, 1.2f, 1.0f);
         }
         else
         {

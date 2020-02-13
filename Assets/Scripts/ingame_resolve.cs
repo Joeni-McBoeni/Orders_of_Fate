@@ -8,10 +8,13 @@ public class ingame_resolve : MonoBehaviour
     public List<Command> commands_r = new List<Command>();
     public List<Command> commands_b = new List<Command>();
     int debugCycleIndex = 0;
+    public Sprite[] spritesForMaps;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = spritesForMaps[GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().mapNumber];
+
         commands_r = GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().commands_r;
         commands_b = GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().commands_b;
 
@@ -23,18 +26,17 @@ public class ingame_resolve : MonoBehaviour
 
     IEnumerator waiter()
     {
-        Debug.Log("go in here, dipshit");
-
         for (int counter = 0; counter < commands_r.Count; counter++)
         {
-            yield return new WaitForSeconds(1.0f);
-
-            Debug.Log("WRYYYYYYYYYYYYYYYYYYYYY");
+            yield return new WaitForSeconds(1.2f);
 
             commands_r[counter].doCommand(1);
             commands_b[counter].doCommand(3);
 
             drawBoard();
+
+            GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().plagueInEffect[0] = false;
+            GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().plagueInEffect[1] = false;
         }
 
         yield return new WaitForSeconds(1.0f);
@@ -54,42 +56,62 @@ public class ingame_resolve : MonoBehaviour
 
         foreach (Space currentSpace in GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().gameSpaces)
         {
+            plagueCheck(currentSpace);
+
             int previousspace = currentSpace.type;
+            string paddedSpaceNumber = spaceNumber.ToString().PadLeft(2, '0');
 
             currentSpace.battle();
 
             if(previousspace != currentSpace.type)
             {
-                GameObject.Find("tile_" + spaceNumber.ToString().PadLeft(2, '0')).GetComponent<btn_space>().spriteChange(currentSpace.type);
+                GameObject.Find("tile_" + paddedSpaceNumber).GetComponent<btn_space>().spriteChange(currentSpace.type);
             }
 
             int renderInfoActive = 0;
             if(currentSpace.units[1] + currentSpace.units[2] + currentSpace.units[3] + currentSpace.units[4] != 0)
             {
                 renderInfoActive = (currentSpace.type + 1) / 2;
-                GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<BoxCollider2D>().enabled = true;
-                GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<Renderer>().enabled = true;
-                GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_e").GetComponent<Renderer>().enabled = true;
-                GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_z").GetComponent<Renderer>().enabled = true;
+                GameObject.Find(paddedSpaceNumber + "_fig").GetComponent<BoxCollider2D>().enabled = true;
+                GameObject.Find(paddedSpaceNumber + "_fig").GetComponent<Renderer>().enabled = true;
+                GameObject.Find(paddedSpaceNumber + "_count_active_e").GetComponent<Renderer>().enabled = true;
+                GameObject.Find(paddedSpaceNumber + "_count_active_z").GetComponent<Renderer>().enabled = true;
+                GameObject.Find(paddedSpaceNumber + "_count_passive_e").GetComponent<Renderer>().enabled = true;
+                GameObject.Find(paddedSpaceNumber + "_count_passive_z").GetComponent<Renderer>().enabled = true;
+
+                if (currentSpace.units[1] + currentSpace.units[3] == 0)
+                {
+                    GameObject.Find(paddedSpaceNumber + "_fig").transform.GetComponent<Renderer>().materials[0].color = new Color(0.8f, 0.8f, 0.8f, 1.0f);
+                }
+                else
+                {
+                    GameObject.Find(paddedSpaceNumber + "_fig").transform.GetComponent<Renderer>().materials[0].color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                }
             }
 
             switch (renderInfoActive)
             {
                 case 1:
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<fig_OnClick>().changeSprite(1);
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_e").GetComponent<number_changer>().changeNumber(currentSpace.units[1] % 10);
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_z").GetComponent<number_changer>().changeNumber(currentSpace.units[1] / 10);
+                    GameObject.Find(paddedSpaceNumber + "_fig").GetComponent<fig_OnClick>().changeSprite(1);
+                    GameObject.Find(paddedSpaceNumber + "_count_active_e").GetComponent<number_changer>().changeNumber(currentSpace.units[1] % 10);
+                    GameObject.Find(paddedSpaceNumber + "_count_active_z").GetComponent<number_changer>().changeNumber(currentSpace.units[1] / 10);
+                    GameObject.Find(paddedSpaceNumber + "_count_passive_e").GetComponent<number_changer>().changeNumber(currentSpace.units[2] % 10);
+                    GameObject.Find(paddedSpaceNumber + "_count_passive_z").GetComponent<number_changer>().changeNumber(currentSpace.units[2] / 10);
                     break;
                 case 2:
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<fig_OnClick>().changeSprite(3);
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_e").GetComponent<number_changer>().changeNumber(currentSpace.units[3] % 10);
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_z").GetComponent<number_changer>().changeNumber(currentSpace.units[3] / 10);
+                    GameObject.Find(paddedSpaceNumber + "_fig").GetComponent<fig_OnClick>().changeSprite(3);
+                    GameObject.Find(paddedSpaceNumber + "_count_active_e").GetComponent<number_changer>().changeNumber(currentSpace.units[3] % 10);
+                    GameObject.Find(paddedSpaceNumber + "_count_active_z").GetComponent<number_changer>().changeNumber(currentSpace.units[3] / 10);
+                    GameObject.Find(paddedSpaceNumber + "_count_passive_e").GetComponent<number_changer>().changeNumber(currentSpace.units[4] % 10);
+                    GameObject.Find(paddedSpaceNumber + "_count_passive_z").GetComponent<number_changer>().changeNumber(currentSpace.units[4] / 10);
                     break;
                 default:
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<BoxCollider2D>().enabled = false;
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_fig").GetComponent<Renderer>().enabled = false;
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_e").GetComponent<Renderer>().enabled = false;
-                    GameObject.Find(spaceNumber.ToString().PadLeft(2, '0') + "_count_active_z").GetComponent<Renderer>().enabled = false;
+                    GameObject.Find(paddedSpaceNumber + "_fig").GetComponent<BoxCollider2D>().enabled = false;
+                    GameObject.Find(paddedSpaceNumber + "_fig").GetComponent<Renderer>().enabled = false;
+                    GameObject.Find(paddedSpaceNumber + "_count_active_e").GetComponent<Renderer>().enabled = false;
+                    GameObject.Find(paddedSpaceNumber + "_count_active_z").GetComponent<Renderer>().enabled = false;
+                    GameObject.Find(paddedSpaceNumber + "_count_passive_e").GetComponent<Renderer>().enabled = false;
+                    GameObject.Find(paddedSpaceNumber + "_count_passive_z").GetComponent<Renderer>().enabled = false;
                     break;
             }
 
@@ -99,6 +121,15 @@ public class ingame_resolve : MonoBehaviour
         }
 
         debugCycleIndex++;
+    }
+
+    private void plagueCheck(Space currentSpace)
+    {
+        if(GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().plagueInEffect[0] == true)
+        {
+            // TODO: deplete the units 
+        }
+        // TODO: do it for the other one
     }
 
     public void debugshit(Space currentSpace, int spaceNumberForDebug)
