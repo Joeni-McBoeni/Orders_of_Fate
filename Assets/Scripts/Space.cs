@@ -10,6 +10,7 @@ public class Space
     private int[] myAdjacentSpaces; // Spaces you can move to from here
     private bool myIndependenceCheck;
     private bool myGFB;
+    private int myBlocked;
 
     public Space(int type, int[] adjacentSpaces)
     {
@@ -22,6 +23,7 @@ public class Space
         myAdjacentSpaces = adjacentSpaces;
         myIndependenceCheck = false;
         myGFB = false;
+        myBlocked = -1;
     }
 
     public void refresh()
@@ -55,7 +57,7 @@ public class Space
 
         int responsibleUnits_r = 2;
         int responsibleUnits_b = 4;
-        while (myUnits[1] + myUnits[2] + myUnits[3] + myUnits[4] != 0) // maybe needs to be "while (myUnits[1] + myUnits[2] != 0 && myUnits[3] + myUnits[4] != 0)"
+        while (myUnits[1] + myUnits[2] != 0 && myUnits[3] + myUnits[4] != 0)
         {
             if(myUnits[responsibleUnits_b] == 0)
             {
@@ -76,9 +78,14 @@ public class Space
                 change = myUnits[responsibleUnits_r];
             }
 
-            myUnits[responsibleUnits_b] -= change;
-            myUnits[responsibleUnits_r] -= change;
-
+            if(myBlocked != 3)
+            {
+                myUnits[responsibleUnits_b] -= change;
+            }
+            if (myBlocked != 1)
+            {
+                myUnits[responsibleUnits_r] -= change;
+            }
 
             Debug.Log(myUnits[responsibleUnits_b] + " " + responsibleUnits_b + " " + myUnits[responsibleUnits_r] + " " + responsibleUnits_r);
         }
@@ -127,6 +134,9 @@ public class Space
             }
             myIndependenceCheck = false;
         }
+
+        myGFB = false;
+        myBlocked = -1;
     }
 
     public int type
@@ -155,5 +165,10 @@ public class Space
     public bool GFB
     {
         set { myGFB = value; }
+    }
+
+    public int blocked
+    {
+        set { myBlocked = value; }
     }
 }

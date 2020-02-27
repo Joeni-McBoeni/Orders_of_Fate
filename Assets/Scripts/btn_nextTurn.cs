@@ -12,6 +12,8 @@ public class btn_nextTurn : MonoBehaviour
     public int roundIndex = 0;
     public int mapNumber = 0;
     public bool[] plagueInEffect = new bool[2]; // 0 = red, 1 = blu
+    public int energy_r = 0;
+    public int energy_b = 0;
 
     void Awake()
     {
@@ -163,6 +165,15 @@ public class btn_nextTurn : MonoBehaviour
 
         if (commands_r.Count == 0)
         {
+            foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+            {
+                if (go.name.PadRight(8, '0').Substring(0, 8) == "ability_")
+                {
+                    go.GetComponent<btn_ability>().spriteChange(2);
+                    go.GetComponent<btn_ability>().checkIfUsable();
+                }
+            }
+
             SceneManager.LoadScene("ingame_plan_r", LoadSceneMode.Single);
         }
         else if (commands_b.Count == 0)
@@ -171,7 +182,18 @@ public class btn_nextTurn : MonoBehaviour
         }
         else 
         {
-            //gameObject.SetActive(false);
+            this.GetComponent<BoxCollider2D>().enabled = false;
+            this.GetComponent<Renderer>().enabled = false;
+            foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+            {
+                if (go.name.PadRight(8, '0').Substring(0, 8) == "ability_")
+                {
+                    go.GetComponent<btn_ability>().visibilityChange(false);
+                }
+            }
+            GameObject.Find("count_energy_e").GetComponent<Renderer>().enabled = false;
+            GameObject.Find("count_energy_z").GetComponent<Renderer>().enabled = false;
+
             SceneManager.LoadScene("ingame_resolve", LoadSceneMode.Single);
         }
     }

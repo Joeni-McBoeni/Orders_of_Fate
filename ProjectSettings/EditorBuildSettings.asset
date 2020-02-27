@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/ingame_prep_0.unity
+    guid: 36e1e4d64b6e4b642b2c5b771a5f9366
+  - enabled: 1
+    path: Assets/Scenes/ingame_prep_1.unity
+    guid: b3a322985d2ef164282ab304cfa3f31f
+  - enabled: 1
     path: Assets/Scenes/ingame_plan_r.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -20,9 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/redwon.unity
     guid: c9b31f6e1739aed43acea0d840584d1e
-  - enabled: 1
-    path: Assets/Scenes/ingame_prep_1.unity
-    guid: b3a322985d2ef164282ab304cfa3f31f
   - enabled: 1
     path: Assets/Scenes/draw_lmao.unity
     guid: 5c3631169cf14884cad743665114652c

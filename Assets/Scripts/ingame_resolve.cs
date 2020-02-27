@@ -30,8 +30,8 @@ public class ingame_resolve : MonoBehaviour
         {
             yield return new WaitForSeconds(1.2f);
 
-            commands_r[counter].doCommand(1);
-            commands_b[counter].doCommand(3);
+            commands_r[counter].doCommand(1, commands_b[counter]);
+            commands_b[counter].doCommand(3, commands_r[counter]);
 
             drawBoard();
 
@@ -115,7 +115,7 @@ public class ingame_resolve : MonoBehaviour
                     break;
             }
 
-            debugshit(currentSpace, spaceNumber);
+            //debugshit(currentSpace, spaceNumber);
 
             spaceNumber++;
         }
@@ -127,9 +127,27 @@ public class ingame_resolve : MonoBehaviour
     {
         if(GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().plagueInEffect[0] == true)
         {
-            // TODO: deplete the units 
+            if (currentSpace.units[3] != 0)
+            {
+                currentSpace.units[3]--;
+            }
+            else if (currentSpace.units[4] != 0)
+            {
+                currentSpace.units[4]--;
+            }
         }
-        // TODO: do it for the other one
+
+        if (GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().plagueInEffect[1] == true)
+        {
+            if (currentSpace.units[1] != 0)
+            {
+                currentSpace.units[1]--;
+            }
+            else if (currentSpace.units[2] != 0)
+            {
+                currentSpace.units[2]--;
+            }
+        }
     }
 
     public void debugshit(Space currentSpace, int spaceNumberForDebug)
@@ -187,7 +205,7 @@ public class ingame_resolve : MonoBehaviour
 
         drawBoard();
 
-        if(GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().gameSpaces[10].type == 1)
+        if (GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().gameSpaces[10].type == 1)
         {
             destroyEverythingInDontDestroyOnLoad();
 
@@ -211,8 +229,13 @@ public class ingame_resolve : MonoBehaviour
         }
         else
         {
+            GameObject.Find("btn_next_turn").GetComponent<BoxCollider2D>().enabled = true;
+            GameObject.Find("btn_next_turn").GetComponent<Renderer>().enabled = true;
+
             GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().commands_r = new List<Command>();
             GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().commands_b = new List<Command>();
+            GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().energy_r++;
+            GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().energy_b++;
 
             GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().roundIndex++;
             SceneManager.LoadScene("ingame_plan_r", LoadSceneMode.Single);
