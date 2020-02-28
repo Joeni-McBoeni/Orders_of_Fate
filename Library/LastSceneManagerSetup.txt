@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/ingame_plan_r.unity
+- path: Assets/Scenes/ingame_prep_4.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
