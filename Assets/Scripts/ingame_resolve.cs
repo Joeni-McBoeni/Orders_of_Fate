@@ -44,12 +44,6 @@ public class ingame_resolve : MonoBehaviour
         endTurn();
     }
 
-        // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void drawBoard()
     {
         int spaceNumber = 0;

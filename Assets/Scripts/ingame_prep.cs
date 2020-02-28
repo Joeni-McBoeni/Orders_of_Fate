@@ -10,10 +10,4 @@ public class ingame_prep : MonoBehaviour
     {
         SceneManager.LoadScene("ingame_resolve", LoadSceneMode.Single);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

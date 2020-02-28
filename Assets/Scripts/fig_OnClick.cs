@@ -14,18 +14,6 @@ public class fig_OnClick : MonoBehaviour
         spriterenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnMouseDown()
     { 
         GameObject.Find("tile_" + gameObject.name.Substring(0, 2)).GetComponent<btn_space>().getClickEvent();

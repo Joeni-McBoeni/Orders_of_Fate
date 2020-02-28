@@ -41,7 +41,7 @@ public class Command
         switch (this.myId)
         {
             case 1:
-                if (enemyCommand.id != 4 || enemyCommand.parameters[0] != myParameters[0]) // might not work, test this!
+                if (enemyCommand.id != 4 || enemyCommand.parameters[0] != myParameters[0]) 
                 {
                     int availableUnits = GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().gameSpaces[myParameters[0]].units[playerId];
                     if (availableUnits >= myParameters[2])

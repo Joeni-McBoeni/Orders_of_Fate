@@ -15,18 +15,6 @@ public class btn_ability : MonoBehaviour
         spriterenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void spriteChange(int type)
     {
         switch (type)

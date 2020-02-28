@@ -16,18 +16,6 @@ public class btn_space : MonoBehaviour
         spriterenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void getClickEvent()
     {
         OnMouseDown();

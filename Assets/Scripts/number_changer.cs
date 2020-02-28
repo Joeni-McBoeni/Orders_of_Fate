@@ -13,18 +13,6 @@ public class number_changer : MonoBehaviour
         spriterenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void changeNumber(int number)
     {
         number %= 10;

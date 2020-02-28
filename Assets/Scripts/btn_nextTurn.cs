@@ -96,18 +96,6 @@ public class btn_nextTurn : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void addMoveCommand(int secondMoveParameter)
     {
         foreach (int possibleSpace in gameSpaces[firstMoveParameter].adjacentSpaces)

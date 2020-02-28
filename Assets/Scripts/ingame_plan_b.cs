@@ -27,10 +27,4 @@ public class ingame_plan_b : MonoBehaviour
         GameObject.Find("count_energy_e").GetComponent<number_changer>().changeNumber(GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().energy_b % 10);
         GameObject.Find("count_energy_z").GetComponent<number_changer>().changeNumber(GameObject.Find("btn_next_turn").GetComponent<btn_nextTurn>().energy_b / 10);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
