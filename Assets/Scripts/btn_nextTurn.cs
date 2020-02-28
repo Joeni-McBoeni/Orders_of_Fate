@@ -125,24 +125,6 @@ public class btn_nextTurn : MonoBehaviour
             }
         }
 
-        // Debug Block
-        if (SceneManager.GetActiveScene().name == "ingame_plan_r")
-        {
-            if (commands_r.Count != 0)
-            {
-                Command cbt = commands_r[commands_r.Count - 1];
-                Debug.Log("Round " + roundIndex + ", Red: " + cbt.parameters[0].ToString() + " to " + cbt.parameters[1].ToString() + ". No. of Units: " + cbt.parameters[2].ToString());
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "ingame_plan_b")
-        {
-            if (commands_b.Count != 0)
-            {
-                Command cbt = commands_b[commands_b.Count - 1];
-                Debug.Log("Round " + roundIndex + ", Blue: " + cbt.parameters[0].ToString() + " to " + cbt.parameters[1].ToString() + ". No. of Units: " + cbt.parameters[2].ToString());
-            }
-        }
-
         GameObject.Find("tile_" + firstMoveParameter.ToString().PadLeft(2, '0')).transform.GetComponent<Renderer>().materials[0].color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         GameObject.Find(firstMoveParameter.ToString().PadLeft(2, '0') + "_fig").transform.GetComponent<Renderer>().materials[0].color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         firstMoveParameter = -1;
