@@ -115,8 +115,6 @@ public class ingame_resolve : MonoBehaviour
                     break;
             }
 
-            //debugshit(currentSpace, spaceNumber);
-
             spaceNumber++;
         }
 
@@ -148,34 +146,6 @@ public class ingame_resolve : MonoBehaviour
                 currentSpace.units[2]--;
             }
         }
-    }
-
-    public void debugshit(Space currentSpace, int spaceNumberForDebug)
-    {
-        // this is allowed to be ugly, cuz it's only for testing
-        string debugType = "";
-        if ((currentSpace.type + 1) / 2 == 0)
-        {
-            debugType += "Grey ";
-        }
-        else if ((currentSpace.type + 1) / 2 == 1)
-        {
-            debugType += "Red ";
-        }
-        else if ((currentSpace.type + 1) / 2 == 2)
-        {
-            debugType += "Blue ";
-        }
-        if (currentSpace.type % 2 == 0)
-        {
-            debugType += "Normal";
-        }
-        else
-        {
-            debugType += "Base";
-        }
-
-        Debug.Log("Cycle " + debugCycleIndex + ", Space " + spaceNumberForDebug + ": " + debugType + ", " + currentSpace.units[1] + "|" + currentSpace.units[2] + "|" + currentSpace.units[3] + "|" + currentSpace.units[4]);
     }
 
     public void syncCommands()

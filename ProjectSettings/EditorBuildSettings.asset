@@ -6,11 +6,32 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/menu_start.unity
+    guid: bb58f2a07c704ea44be2627a908ecd79
+  - enabled: 1
+    path: Assets/Scenes/menu_mapchoice.unity
+    guid: f304698355bb78b4ebc6dc19dc381b9b
+  - enabled: 1
+    path: Assets/Scenes/menu_launcher.unity
+    guid: e989fc443302f2449a70005df69bf381
+  - enabled: 1
+    path: Assets/Scenes/menu_joined.unity
+    guid: d3e4e92e71bc3b141b8d257564062ae7
+  - enabled: 1
     path: Assets/Scenes/ingame_prep_0.unity
     guid: 36e1e4d64b6e4b642b2c5b771a5f9366
   - enabled: 1
     path: Assets/Scenes/ingame_prep_1.unity
     guid: b3a322985d2ef164282ab304cfa3f31f
+  - enabled: 1
+    path: Assets/Scenes/ingame_prep_2.unity
+    guid: 3773b85b5057a3b43b7b78b8403eddf1
+  - enabled: 1
+    path: Assets/Scenes/ingame_prep_3.unity
+    guid: ff4db93b2c6f5d14a8412abe62d2a034
+  - enabled: 1
+    path: Assets/Scenes/ingame_prep_4.unity
+    guid: dc49a5f463905b8469c9c7323ce1ecbf
   - enabled: 1
     path: Assets/Scenes/ingame_plan_r.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -18,11 +39,11 @@ EditorBuildSettings:
     path: Assets/Scenes/ingame_plan_b.unity
     guid: 7fabf09f9ea572f46aa95a0ffcf9b6df
   - enabled: 1
-    path: Assets/Scenes/bluwon.unity
-    guid: e071b84915e2cab46ab3816380507497
-  - enabled: 1
     path: Assets/Scenes/ingame_resolve.unity
     guid: fdcac058fa96f2d46bfa5008682b42cb
+  - enabled: 1
+    path: Assets/Scenes/bluwon.unity
+    guid: e071b84915e2cab46ab3816380507497
   - enabled: 1
     path: Assets/Scenes/redwon.unity
     guid: c9b31f6e1739aed43acea0d840584d1e

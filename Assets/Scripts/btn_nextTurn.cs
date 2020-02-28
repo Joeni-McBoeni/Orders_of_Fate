@@ -165,15 +165,6 @@ public class btn_nextTurn : MonoBehaviour
 
         if (commands_r.Count == 0)
         {
-            foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
-            {
-                if (go.name.PadRight(8, '0').Substring(0, 8) == "ability_")
-                {
-                    go.GetComponent<btn_ability>().spriteChange(2);
-                    go.GetComponent<btn_ability>().checkIfUsable();
-                }
-            }
-
             SceneManager.LoadScene("ingame_plan_r", LoadSceneMode.Single);
         }
         else if (commands_b.Count == 0)
